@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
-const MangaPosters = (props) => {
+const Posters = (props) => {
   const [posters, setPosters] = useState([])
   useEffect(async () => {
     const manga = await axios.get('https://kitsu.io/api/edge/manga');
@@ -23,4 +23,4 @@ const MangaPosters = (props) => {
   )
 }
 
-export default MangaPosters
+export default Posters
