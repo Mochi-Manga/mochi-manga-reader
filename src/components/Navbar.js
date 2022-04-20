@@ -188,7 +188,7 @@ export default function Navbar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Link href="/signin">
+              <Link href="/login">
                 <Button
                   // key={page}
                   // onClick={handleSignin}
