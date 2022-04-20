@@ -1,7 +1,7 @@
-// import { Box, Avatar } from '@mui/material';
-// import { useState, useEffect } from 'react';
-// import { supabase } from '../supabaseClient';
-// import { deepPurple } from '@mui/material/colors';
+import { Box, Avatar } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { supabase } from '../supabaseClient';
+import { deepPurple } from '@mui/material/colors';
 
 // const Account = ({ session }) => {
 //   const [loading, setLoading] = useState(true);
@@ -128,10 +128,114 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/Auth';
+import { FlashOnOutlined } from '@mui/icons-material';
 
-export function Dashboard() {
+export function Dashboard({ session }) {
   const { user, signOut } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState();
+  const [website, setWebsite] = useState();
+  const [avatar_url, setAvatarUrl] = useState();
   console.log(user);
+
+  useEffect(() => {
+    getProfile();
+  }, [session]);
+
+  async function getProfile() {
+    try {
+      const user = supabase.auth.user();
+      let { data, error, status } = await supabase
+        .from('profiles')
+        .select(`id, username`);
+      // .eq('id', user.id)
+      // .single();
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data) {
+        setUsername(data.username);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
+  // async function updateProfile() {
+  //   try {
+  //     const user = supabase.auth.user();
+  //     const updates = {
+  //       id: user.id,
+  //       username,
+  //       updated_at: new Date(),
+  //     };
+
+  //     let { error } = await supabase.from('profiles').upsert(updates);
+  //     if (error) {
+  //       throw error;
+  //     }
+  //   } catch (error) {
+  //     alert(error.message);
+  //   }
+  // }
+
+  // return (
+  //   <div className="container mx-auto grid place-content-center min-h-screen">
+  //     <p>Oh hi there {session.user.email}</p>
+  //     <input
+  //       className="my-4 border-2 border-gray-500 rounded-xl p-4 w-full"
+  //       type="username"
+  //       placeholder="Enter a username"
+  //       value={username}
+  //       onChange={(e) => setUsername(e.target.value)}
+  //     />
+  //     <button
+  //       onClick={(e) => {
+  //         e.preventDefault();
+  //         updateProfile();
+  //       }}
+  //       className="w-full mt-4 p-2 pl-5 pr-5 bg-blue-500 text-gray-100 text-lg rounded-lg focus:border-4 border-blue-300"
+  //     >
+  //       <span>Update profile</span>
+  //     </button>
+  //     <p className="mt-4 text-center">or</p>
+  //     <button
+  //       className="mt-4 p-2 pl-5 pr-5 bg-blue-500 text-gray-100 text-lg rounded-lg focus:border-4 border-blue-300"
+  //       onClick={() => supabase.auth.signOut()}
+  //     >
+  //       Logout
+  //     </button>
+  //   </div>
+  // );
+
+  // async function getProfile() {
+  //   try {
+  //     setLoading(true);
+  //     const user = supabase.auth.user();
+
+  //     let { data, error, status } = await supabase
+  //       .from('profiles')
+  //       .select(`username, website, avatar_url`)
+  //       .eq('id', user.id)
+  //       .single();
+
+  //     if (error && status !== 406) {
+  //       throw error;
+  //     }
+
+  //     if (data) {
+  //       setUsername(data.username);
+  //       setWebsite(data.website);
+  //       setAvatarUrl(data.avatar_url);
+  //     }
+  //   } catch (error) {
+  //     alert(error.message);
+  //   } finally {
+  //     setLoading(FlashOnOutlined);
+  //   }
+  // }
 
   const navigate = useNavigate();
 
@@ -143,7 +247,43 @@ export function Dashboard() {
 
   return (
     <div>
-      <p>Welcome, {user?.id}!!</p>
+      <p>Welcome, {user?.id}!!</p>{' '}
+      <div>
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="text"
+          value={session.user.email}
+          disabled
+        />{' '}
+      </div>{' '}
+      <div>
+        <label htmlFor="username">Userame</label>{' '}
+        <input
+          id="username"
+          type="text"
+          value={username || ''}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          type="website"
+          value={website || ''}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
+      <div>
+        <button
+          className="button block primary"
+          // onClick={() => updateProfile({ username, website, avatar_url })}
+          disabled={loading}
+        >
+          {loading ? 'Loading ...' : 'Update'}
+        </button>
+      </div>
       <button onClick={handleSignOut}>Sign Out</button>
     </div>
   );

@@ -7,7 +7,6 @@ import { supabase } from './supabaseClient';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
-import MainManga from './components/Main';
 
 function App() {
   const [session, setSession] = useState(null);
@@ -26,7 +25,7 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route exact path="/home" element={<MainManga />} />
+            <Route exact path="/home" />
             <Route
               exact
               path="/login"

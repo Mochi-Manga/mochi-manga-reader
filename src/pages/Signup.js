@@ -11,6 +11,8 @@ import {
   Typography,
   Stack,
 } from '@mui/material';
+import moment from 'moment';
+import { supabase } from '../supabaseClient';
 
 export function Signup() {
   const [email, setemail] = useState('');
@@ -27,9 +29,25 @@ export function Signup() {
   async function SignUpUser(e) {
     // Get emaila nd password input val
     e.preventDefault();
-    confirmPassword === password
-      ? signUp({ email, password, username })
-      : seterrorMessage('PASSWORDS_DONT_MATCH');
+    const { user, session, error } = await signUp({
+      email,
+      password,
+    });
+
+    const superbaseResponse = await supabase.from('profiles').insert([
+      {
+        username: username,
+        id: user.id,
+        updated_at: moment().format(),
+        avatar_url: null,
+        website: null,
+      },
+    ]);
+    console.log(superbaseResponse);
+    // console.log(response);
+    // confirmPassword === password
+    //   ? signUp({ email, password, username })
+    //   : seterrorMessage('PASSWORDS_DONT_MATCH');
 
     navigate('/dashboard');
   }
