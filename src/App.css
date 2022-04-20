@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+.mochi--logo {
+  height: 70px;
+  max-width: 200px;
+}
