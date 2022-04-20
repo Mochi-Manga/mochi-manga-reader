@@ -1,5 +1,8 @@
-import './App.css';
+import React from 'react';
+import { useEffect, useState } from 'react';
+import BasicCard from './components/MangaCard';
 import Navbar from './components/Navbar';
+import MangaApi from './services/MangaAPI';
 import Auth, { AuthProvider } from './contexts/Auth';
 import { Dashboard } from './pages/Account';
 import { useState, useEffect } from 'react';
@@ -8,9 +11,27 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 
-function App() {
+export default function App(props) {
+  const [data, setData] = useState({});
   const [session, setSession] = useState(null);
+  const fetchData = async () => {
+      const response = await MangaApi();
+      console.log(response);
+      let synopsis = response.data.data.attributes.synopsis;
+      let poster = response.data.data.attributes.posterImage.medium;
+      let title = response.data.data.attributes.canonicalTitle;
+      let dataObject = {
+        'title': title,
+        'synopsis': synopsis,
+        'posterURL': poster
+      }
+      setData(dataObject);
+  };
 
+  useEffect(() => {
+    fetchData()
+  },[]);
+  
   useEffect(() => {
     setSession(supabase.auth.session());
 
@@ -22,6 +43,7 @@ function App() {
   return (
     <div className="container">
       <Navbar />
+      <BasicCard passData={data}/>
       <Router>
         <AuthProvider>
           <Routes>
@@ -66,5 +88,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
