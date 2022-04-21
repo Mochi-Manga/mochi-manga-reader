@@ -1,4 +1,4 @@
-import { Box, Avatar } from '@mui/material';
+// import { Box, Avatar } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { deepPurple } from '@mui/material/colors';
@@ -129,6 +129,23 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/Auth';
 import { FlashOnOutlined } from '@mui/icons-material';
+import {
+  Box,
+  Container,
+  FormControl,
+  InputLabel,
+  Button,
+  Input,
+  Typography,
+  Stack,
+  TextField,
+  Grid,
+  Paper,
+  CssBaseline,
+  Avatar,
+  FormControlLabel,
+  Checkbox,
+} from '@mui/material';
 
 export function Dashboard({ session }) {
   const { user, signOut } = useAuth();
@@ -136,7 +153,7 @@ export function Dashboard({ session }) {
   const [username, setUsername] = useState();
   const [website, setWebsite] = useState();
   const [avatar_url, setAvatarUrl] = useState();
-  console.log(user);
+  console.log('user', user);
 
   useEffect(() => {
     getProfile();
@@ -147,15 +164,16 @@ export function Dashboard({ session }) {
       const user = supabase.auth.user();
       let { data, error, status } = await supabase
         .from('profiles')
-        .select(`id, username`);
-      // .eq('id', user.id)
-      // .single();
+        .select(`id, username`)
+        .eq('id', user.id)
+        .single();
 
       if (error && status !== 406) {
         throw error;
       }
 
       if (data) {
+        console.log(data.username);
         setUsername(data.username);
       }
     } catch (error) {
@@ -246,24 +264,40 @@ export function Dashboard({ session }) {
   }
 
   return (
-    <div>
-      <p>Welcome, {user?.id}!!</p>{' '}
+    <Container>
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}></Avatar>
+        <Typography component="h1" variant="h5">
+          Profile
+        </Typography>
+        <Box>
+          <Grid>
+            <Typography>Email: {session.user.email}</Typography>
+            <Typography>Username: {username}</Typography>
+          </Grid>
+          <Button onClick={handleSignOut}>Sign Out</Button>
+        </Box>
+      </Box>
+      {/* <p>Welcome, {username}!!</p>{' '}
       <div>
         <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="text"
-          value={session.user.email}
-          disabled
-        />{' '}
+        <input id="email" type="text" value={session.user.email} disabled />
       </div>{' '}
       <div>
-        <label htmlFor="username">Userame</label>{' '}
+        <label htmlFor="username">Username</label>{' '}
         <input
           id="username"
           type="text"
-          value={username || ''}
-          onChange={(e) => setUsername(e.target.value)}
+          value={username}
+          disabled
+          // onChange={(e) => setUsername(e.target.value)}
         />
       </div>
       <div>
@@ -284,7 +318,7 @@ export function Dashboard({ session }) {
           {loading ? 'Loading ...' : 'Update'}
         </button>
       </div>
-      <button onClick={handleSignOut}>Sign Out</button>
-    </div>
+      <button onClick={handleSignOut}>Sign Out</button> */}
+    </Container>
   );
 }
