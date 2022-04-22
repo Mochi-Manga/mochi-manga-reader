@@ -8,6 +8,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import MangaList from './components/MangaList';
+import MangaApi from './services/MangaAPI';
+import SearchManga from './pages/Search';
+import Main from './pages/Main';
 
 function App() {
   const [session, setSession] = useState(null);
@@ -18,11 +21,13 @@ function App() {
     const url = `https://kitsu.io/api/edge/manga?filter[text]=${searchValue}`;
     const response = await fetch(url);
     const responseJson = await response.json();
+    console.log(responseJson.data);
 
     if (responseJson.data) {
       setMangas(responseJson.data);
     }
   };
+
   useEffect(() => {
     console.log('is this working');
     const delaySearch = setTimeout(() => {
@@ -30,6 +35,24 @@ function App() {
     }, 500);
     return () => clearTimeout(delaySearch);
   }, [searchValue]);
+
+  //  const fetchData = async () => {
+  //     const response = await MangaApi();
+  //     console.log(response);
+  //     let synopsis = response.data.data.attributes.synopsis;
+  //     let poster = response.data.data.attributes.posterImage.medium;
+  //     let title = response.data.data.attributes.canonicalTitle;
+  //     let dataObject = {
+  //       'title': title,
+  //       'synopsis': synopsis,
+  //       'posterURL': poster
+  //     }
+  //     setData(dataObject);
+  // };
+
+  // useEffect(() => {
+  //   fetchData()
+  // },[]);
 
   useEffect(() => {
     setSession(supabase.auth.session());
@@ -45,7 +68,7 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route exact path="/home" />
+            <Route exact path="/home" element={<Main />} />
             <Route
               exact
               path="/login"
@@ -79,9 +102,24 @@ function App() {
                 )
               }
             />
+            <Route
+              exact
+              path="/search"
+              element={<MangaList mangas={manga} />}
+            />
+            <Route
+              exact
+              path="/searchtemp"
+              element={
+                <SearchManga
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
+                />
+              }
+              element={<MangaList mangas={manga} />}
+            />
           </Routes>
         </AuthProvider>
-        <MangaList mangas={manga} />
       </Router>
     </div>
   );

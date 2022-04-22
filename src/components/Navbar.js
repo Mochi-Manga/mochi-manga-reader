@@ -97,6 +97,12 @@ export default function Navbar(props) {
     setAnchorElUser(null);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.search();
+    }
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -178,12 +184,15 @@ export default function Navbar(props) {
           </Typography>
           <Search>
             <SearchIconWrapper>
-              <SearchIcon />
+              <SearchIcon
+                onClick={(e) => props.setSearchValue(e.target.value)}
+              />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
               onChange={(e) => props.setSearchValue(e.target.value)}
+              onKeyUp={handleKeyPress.bind(this)}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
