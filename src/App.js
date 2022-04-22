@@ -25,10 +25,11 @@ function App() {
   };
   useEffect(() => {
     console.log('is this working');
-    const delaySearch = setTimeout(() => {
-      getMangaRequest(searchValue);
-    }, 500);
-    return () => clearTimeout(delaySearch);
+    getMangaRequest(searchValue);
+    // const delaySearch = setTimeout(() => {
+    //   getMangaRequest(searchValue);
+    // }, 500);
+    // return () => clearTimeout(delaySearch);
   }, [searchValue]);
 
   useEffect(() => {
