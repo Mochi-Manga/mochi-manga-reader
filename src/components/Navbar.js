@@ -99,7 +99,7 @@ export default function Navbar(props) {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      this.search();
+      props.setSearchValue(e.target.value);
     }
   };
 
@@ -184,15 +184,12 @@ export default function Navbar(props) {
           </Typography>
           <Search>
             <SearchIconWrapper>
-              <SearchIcon
-                onClick={(e) => props.setSearchValue(e.target.value)}
-              />
+              <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              onChange={(e) => props.setSearchValue(e.target.value)}
-              onKeyUp={handleKeyPress.bind(this)}
+              onKeyPress={handleKeyPress}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
