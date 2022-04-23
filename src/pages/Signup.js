@@ -34,7 +34,7 @@ export function Signup() {
   const navigate = useNavigate();
 
   async function SignUpUser(e) {
-    // Get emaila nd password input val
+    // Get email and password input val
     e.preventDefault();
     const { user, session, error } = await signUp({
       email,

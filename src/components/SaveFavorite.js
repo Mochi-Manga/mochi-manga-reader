@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import moment from 'moment';
 import { render } from '@testing-library/react';
 import { ConstructionOutlined } from '@mui/icons-material';
 
@@ -16,8 +15,8 @@ export default async function saveFavorite(posterId) {
   ]);
 
   return (
-    <Button size="small" onClick={() => save()}>
-      Save2Fave
-    </Button>
-  );
+    <Button size='small' onClick={() => save()} >Save2Fave</Button>
+  )
+
+
 }
