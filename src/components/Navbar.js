@@ -14,6 +14,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/Auth';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -63,7 +65,7 @@ export default function Navbar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -97,6 +99,13 @@ export default function Navbar() {
     setAnchorElUser(null);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      console.log(e.target.value);
+      props.setSearchValue(e.target.value);
+    }
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -114,44 +123,43 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={handleMenuClose}>My favorites</MenuItem>
       <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
     </Menu>
   );
-  //   mobile menu
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+  // //   mobile menu
+  // const mobileMenuId = 'primary-search-account-menu-mobile';
+  // const renderMobileMenu = (
+  //   <Menu
+  //     anchorEl={mobileMoreAnchorEl}
+  //     anchorOrigin={{
+  //       vertical: 'top',
+  //       horizontal: 'right',
+  //     }}
+  //     id={mobileMenuId}
+  //     keepMounted
+  //     transformOrigin={{
+  //       vertical: 'top',
+  //       horizontal: 'right',
+  //     }}
+  //     open={isMobileMenuOpen}
+  //     onClose={handleMobileMenuClose}
+  //   >
+  //     <MenuItem onClick={handleProfileMenuOpen}>
+  //       <IconButton
+  //         size="large"
+  //         aria-label="account of current user"
+  //         aria-controls="primary-search-account-menu"
+  //         aria-haspopup="true"
+  //         color="inherit"
+  //       >
+  //         <AccountCircle />
+  //       </IconButton>
+  //       <p>Profile</p>
+  //     </MenuItem>
+  //   </Menu>
+  // );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -183,12 +191,22 @@ export default function Navbar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onKeyPress={handleKeyPress}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Link href="/login">
+              <Link href="/search" style={{ textDecoration: 'none' }}>
+                <Button
+                  // key={page}
+                  // onClick={handleSignin}
+                  sx={{ my: 2, color: 'black', display: 'block' }}
+                >
+                  SEARCH
+                </Button>
+              </Link>
+              <Link href="/login" style={{ textDecoration: 'none' }}>
                 <Button
                   // key={page}
                   // onClick={handleSignin}
@@ -197,7 +215,7 @@ export default function Navbar() {
                   SIGN IN
                 </Button>
               </Link>
-              <Link href="/account">
+              <Link href="/dashboard" style={{ textDecoration: 'none' }}>
                 <Button
                   // key={page}
                   // onClick={handleSignin}
@@ -211,7 +229,7 @@ export default function Navbar() {
               size="large"
               edge="end"
               aria-label="account of current user"
-              aria-controls={menuId}
+              // aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
@@ -219,7 +237,7 @@ export default function Navbar() {
               <AccountCircle />
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="show more"
@@ -230,10 +248,10 @@ export default function Navbar() {
             >
               <MoreIcon />
             </IconButton>
-          </Box>
+          </Box> */}
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+      {/* {renderMobileMenu} */}
       {renderMenu}
     </Box>
   );

@@ -3,7 +3,6 @@ import MangaCard from './MangaCard';
 import MangaApi from '../services/MangaAPI';
 import { Box } from '@mui/material';
 
-
 function MangaCardPoster() {
   const [posters, setPosters] = useState([]);
   const fetchData = async () => {
@@ -34,6 +33,5 @@ function MangaCardPoster() {
     </Box>
     )
 }
-
 
 export default MangaCardPoster
