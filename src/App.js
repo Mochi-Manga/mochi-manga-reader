@@ -1,13 +1,12 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import Auth, { AuthProvider } from './contexts/Auth';
+import { AuthProvider } from './contexts/Auth';
 import { Dashboard } from './pages/Account';
 import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
-import MangaList from './components/MangaList';
 import MangaApi from './services/MangaAPI';
 import MangaCardPoster from './components/MangaCardPoster';
 import SearchManga from './pages/Search';
@@ -24,6 +23,10 @@ function App() {
     const response = await MangaApi();
     setData(response.data.data);
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   // const getMangaRequest = async () => {
   //   const url = `https://kitsu.io/api/edge/manga?filter[text]=${searchValue}`;
@@ -43,13 +46,14 @@ function App() {
   //   }, 500);
   //   return () => clearTimeout(delaySearch);
   // }, [searchValue]);
-  // useEffect(() => {
-  //   setSession(supabase.auth.session());
 
-  //   supabase.auth.onAuthStateChange((_event, session) => {
-  //     setSession(session);
-  //   });
-  // }, []);
+  useEffect(() => {
+    setSession(supabase.auth.session());
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
 
   return (
     <div className="container">
