@@ -25,6 +25,7 @@ export function Login() {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
   const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const { signIn } = useAuth();
 
@@ -58,6 +59,11 @@ export function Login() {
           Sign in
         </Typography>
         <Box component="form" onSubmit={loginUser} noValidate sx={{ mt: 1 }}>
+          {error && (
+            <Snackbar>
+              <Alert severity="warning">{error}!</Alert>
+            </Snackbar>
+          )}
           <TextField
             margin="normal"
             required
@@ -84,11 +90,6 @@ export function Login() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          {error && (
-            <Snackbar>
-              <Alert severity="warning">{error}!</Alert>
-            </Snackbar>
-          )}
           <Button
             type="submit"
             fullWidth
@@ -112,53 +113,5 @@ export function Login() {
         </Box>
       </Box>
     </Container>
-    // <Box
-    //   sx={{
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //   }}
-    // >
-    //   {/* <Container p={2}>
-    //     <Box textAlign="center">
-    //       <Typography variant="h4">Login</Typography>
-    //     </Box> */}
-    //   <Box my={4} textAlign="left" p={8}>
-    //     <Stack>
-    //       <form onSubmit={(e) => loginUser(e)}>
-    //         <Stack py={2}>
-    //           <FormControl>
-    //             <InputLabel>Email</InputLabel>
-    //             <Input
-    //               onChange={(e) => setemail(e.target.value)}
-    //               type="email"
-    //               placeholder="Your email"
-    //             />
-    //           </FormControl>
-    //         </Stack>
-    //         <Stack py={2}>
-    //           <FormControl mt={6}>
-    //             <InputLabel>Password</InputLabel>
-    //             <Input
-    //               onChange={(e) => setpassword(e.target.value)}
-    //               type="password"
-    //               placeholder="*********"
-    //             />
-    //           </FormControl>
-    //         </Stack>
-    //         <Stack py={2}>
-    //           <Typography>
-    //             Don't have an account? <Link to="/signup">Sign Up</Link>
-    //           </Typography>
-    //         </Stack>
-    //         <Stack py={3}>
-    //           <Button width="full" mt={4} type="submit">
-    //             Log In
-    //           </Button>
-    //         </Stack>
-    //       </form>
-    //     </Stack>
-    //   </Box>
-    //   {/* </Container> */}
-    // </Box>
   );
 }

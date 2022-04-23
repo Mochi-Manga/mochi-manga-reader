@@ -285,40 +285,6 @@ export function Dashboard({ session }) {
           <Button onClick={handleSignOut}>Sign Out</Button>
         </Box>
       </Box>
-      {/* <p>Welcome, {username}!!</p>{' '}
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
-      </div>{' '}
-      <div>
-        <label htmlFor="username">Username</label>{' '}
-        <input
-          id="username"
-          type="text"
-          value={username}
-          disabled
-          // onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          type="website"
-          value={website || ''}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
-      </div>
-      <div>
-        <button
-          className="button block primary"
-          // onClick={() => updateProfile({ username, website, avatar_url })}
-          disabled={loading}
-        >
-          {loading ? 'Loading ...' : 'Update'}
-        </button>
-      </div>
-      <button onClick={handleSignOut}>Sign Out</button> */}
     </Container>
   );
 }

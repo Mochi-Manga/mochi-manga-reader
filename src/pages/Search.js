@@ -5,6 +5,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box } from '@mui/material';
 import MangaList from '../components/MangaList';
+import MangaSearchApi from '../services/MangaSearchAPI';
 
 const SearchBar = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,17 +53,13 @@ export default function SearchManga(props) {
   const [searchValue, setSearchValue] = useState('');
 
   const getMangaRequest = async () => {
-    const url = `https://kitsu.io/api/edge/manga?filter[text]=${searchValue}`;
-    const response = await fetch(url);
-    const responseJson = await response.json();
-    console.log(responseJson.data);
-    if (responseJson.data) {
-      setMangas(responseJson.data);
+    const searchResponse = await MangaSearchApi(searchValue);
+    if (searchResponse.data.data) {
+      setMangas(searchResponse.data.data);
     }
   };
 
   useEffect(() => {
-    console.log('searchtemp is this working');
     const delaySearch = setTimeout(() => {
       getMangaRequest(searchValue);
     }, 500);
@@ -70,10 +67,7 @@ export default function SearchManga(props) {
   }, [searchValue]);
 
   const handleKeyPress = (e) => {
-    // e.preventDefault();
-
     if (e.key === 'Enter') {
-      //   console.log('what is this', props);
       setSearchValue(e.target.value);
     }
   };

@@ -30,7 +30,7 @@ function Browse(props) {
   }, []);
 
   const genreList = () => {
-    console.log('lcick');
+    console.log('click');
   };
 
   return (
@@ -55,5 +55,3 @@ function Browse(props) {
 }
 
 export default Browse;
-
-// https://kitsu.io/api/edge/categories

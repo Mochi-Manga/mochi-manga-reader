@@ -88,16 +88,6 @@ export function Signup() {
                 autoFocus
               />
             </Grid>
-            {/* <Grid item xs={12} sm={6}> */}
-            {/* <TextField
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="family-name"
-              /> */}
-            {/* </Grid> */}
             <Grid item xs={12}>
               <TextField
                 required
@@ -121,12 +111,6 @@ export function Signup() {
                 onChange={(e) => setpassword(e.target.value)}
               />
             </Grid>
-            {/* <Grid item xs={12}> */}
-            {/* <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              /> */}
-            {/* </Grid> */}
           </Grid>
           <Button
             type="submit"
@@ -146,91 +130,5 @@ export function Signup() {
         </Box>
       </Box>
     </Container>
-    // <Box
-    //   sx={{
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //   }}
-    // >
-    //   {/* <Container p={2}>
-    //     {/* <Box
-    //       sx={{
-    //         display: 'flex',
-    //         justifyContent: 'center',
-    //       }}
-    //     > */}
-
-    //   {/* <Typography variant="h4" p={10}>
-    //     Sign Up
-    //   </Typography> */}
-
-    //   {/* </Box> */}
-    //   <Box my={4} textAlign="left" p={8}>
-    //     <Stack>
-    //       <Typography variant="h3" p={5}>
-    //         Sign Up
-    //       </Typography>
-    //     </Stack>
-    //     <Stack py={2}>
-    //       <form onSubmit={(e) => SignUpUser(e)}>
-    //         <Stack>
-    //           <FormControl>
-    //             <InputLabel>Userame</InputLabel>
-    //             <Input
-    //               onChange={(e) => setusername(e.target.value)}
-    //               placeholder="Username"
-    //               required
-    //             />
-    //           </FormControl>
-    //         </Stack>
-
-    //         <Stack py={2}>
-    //           <FormControl mt={6}>
-    //             <InputLabel>Email</InputLabel>
-    //             <Input
-    //               type="email"
-    //               onChange={(e) => setemail(e.target.value)}
-    //               placeholder="Your email"
-    //               required
-    //             />
-    //           </FormControl>
-    //         </Stack>
-    //         <Stack py={2}>
-    //           <FormControl mt={6}>
-    //             <InputLabel>password</InputLabel>
-    //             <Input
-    //               type="password"
-    //               onChange={(e) => setpassword(e.target.value)}
-    //               placeholder="*********"
-    //               required
-    //             />
-    //           </FormControl>
-    //         </Stack>
-    //         <Stack py={2}>
-    //           <FormControl mt={6}>
-    //             <InputLabel>confirm password</InputLabel>
-    //             <Input
-    //               placeholder="*********"
-    //               onChange={(e) => setconfirmPassword(e.target.value)}
-    //               required
-    //             />
-    //           </FormControl>
-    //         </Stack>
-    //         <Typography variant="p">
-    //           Have an account already? <Link to="/login">Log In</Link>
-    //         </Typography>
-    //         <Stack py={2}>
-    //           <Button width="full" mt={4} type="submit">
-    //             Sign Up
-    //           </Button>
-    //         </Stack>
-    //         <Typography fontSize="lg" color="red" align="center">
-    //           {errorMessage && errorMessage}
-    //         </Typography>
-    //       </form>
-    //     </Stack>
-    //   </Box>
-    //   {/* </Container> */}
-    // </Box>
   );
 }

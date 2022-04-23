@@ -9,15 +9,6 @@ import MangaApi from '../services/MangaAPI';
 import { supabase } from '../supabaseClient';
 import moment from 'moment';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
-
 export default function MangaCard({ poster }) {
   return (
     <Card sx={{ maxWidth: 400 }} className="card">

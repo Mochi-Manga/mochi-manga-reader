@@ -197,7 +197,7 @@ export default function Navbar(props) {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Link href="/search">
+              <Link href="/search" style={{ textDecoration: 'none' }}>
                 <Button
                   // key={page}
                   // onClick={handleSignin}
@@ -206,7 +206,7 @@ export default function Navbar(props) {
                   SEARCH
                 </Button>
               </Link>
-              <Link href="/login">
+              <Link href="/login" style={{ textDecoration: 'none' }}>
                 <Button
                   // key={page}
                   // onClick={handleSignin}
@@ -215,7 +215,7 @@ export default function Navbar(props) {
                   SIGN IN
                 </Button>
               </Link>
-              <Link href="/dashboard">
+              <Link href="/dashboard" style={{ textDecoration: 'none' }}>
                 <Button
                   // key={page}
                   // onClick={handleSignin}

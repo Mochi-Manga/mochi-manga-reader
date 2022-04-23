@@ -25,50 +25,31 @@ function App() {
     setData(response.data.data);
   };
 
-  const getMangaRequest = async () => {
-    const url = `https://kitsu.io/api/edge/manga?filter[text]=${searchValue}`;
-    const response = await fetch(url);
-    const responseJson = await response.json();
-    console.log(responseJson.data);
+  // const getMangaRequest = async () => {
+  //   const url = `https://kitsu.io/api/edge/manga?filter[text]=${searchValue}`;
+  //   const response = await fetch(url);
+  //   const responseJson = await response.json();
+  //   console.log(responseJson.data);
 
-    if (responseJson.data) {
-      setMangas(responseJson.data);
-    }
-  };
-
-  useEffect(() => {
-    console.log('is this working');
-    const delaySearch = setTimeout(() => {
-      getMangaRequest(searchValue);
-    }, 500);
-    return () => clearTimeout(delaySearch);
-  }, [searchValue]);
-
-  //  const fetchData = async () => {
-  //     const response = await MangaApi();
-  //     console.log(response);
-  //     let synopsis = response.data.data.attributes.synopsis;
-  //     let poster = response.data.data.attributes.posterImage.medium;
-  //     let title = response.data.data.attributes.canonicalTitle;
-  //     let dataObject = {
-  //       'title': title,
-  //       'synopsis': synopsis,
-  //       'posterURL': poster
-  //     }
-  //     setData(dataObject);
+  //   if (responseJson.data) {
+  //     setMangas(responseJson.data);
+  //   }
   // };
 
   // useEffect(() => {
-  //   fetchData()
-  // },[]);
+  //   console.log('is this working');
+  //   const delaySearch = setTimeout(() => {
+  //     getMangaRequest(searchValue);
+  //   }, 500);
+  //   return () => clearTimeout(delaySearch);
+  // }, [searchValue]);
+  // useEffect(() => {
+  //   setSession(supabase.auth.session());
 
-  useEffect(() => {
-    setSession(supabase.auth.session());
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
+  //   supabase.auth.onAuthStateChange((_event, session) => {
+  //     setSession(session);
+  //   });
+  // }, []);
 
   return (
     <div className="container">
