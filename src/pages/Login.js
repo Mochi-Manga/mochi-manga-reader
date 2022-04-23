@@ -17,6 +17,8 @@ import {
   Avatar,
   FormControlLabel,
   Checkbox,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 
 export function Login() {
@@ -32,10 +34,11 @@ export function Login() {
     e.preventDefault();
 
     try {
+      setError('');
       signIn({ email, password });
       navigate('/dashboard');
-    } catch (error) {
-      throw new Error('Error in login: ' + error);
+    } catch {
+      setError('Your email/password is incorrect');
     }
   }
 
@@ -81,6 +84,11 @@ export function Login() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
+          {error && (
+            <Snackbar>
+              <Alert severity="warning">{error}!</Alert>
+            </Snackbar>
+          )}
           <Button
             type="submit"
             fullWidth

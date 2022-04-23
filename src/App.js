@@ -9,13 +9,21 @@ import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import MangaList from './components/MangaList';
 import MangaApi from './services/MangaAPI';
+import MangaCardPoster from './components/MangaCardPoster';
 import SearchManga from './pages/Search';
 import Main from './pages/Main';
+import Browse from './pages/Browse';
 
 function App() {
   const [session, setSession] = useState(null);
+  const [data, setData] = useState({});
   const [manga, setMangas] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+
+  const fetchData = async () => {
+    const response = await MangaApi();
+    setData(response.data.data);
+  };
 
   const getMangaRequest = async () => {
     const url = `https://kitsu.io/api/edge/manga?filter[text]=${searchValue}`;
@@ -68,7 +76,16 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route exact path="/home" element={<Main />} />
+            <Route
+              exact
+              path="/home"
+              element={
+                <>
+                  <Main />
+                  <MangaCardPoster dataFromApp={data} />
+                </>
+              }
+            />
             <Route
               exact
               path="/login"
@@ -102,22 +119,8 @@ function App() {
                 )
               }
             />
-            <Route
-              exact
-              path="/search"
-              element={<MangaList mangas={manga} />}
-            />
-            <Route
-              exact
-              path="/searchtemp"
-              element={
-                <SearchManga
-                  searchValue={searchValue}
-                  setSearchValue={setSearchValue}
-                />
-              }
-              element={<MangaList mangas={manga} />}
-            />
+            <Route exact path="/search" element={<SearchManga />} />
+            <Route exact path="/browse" element={<Browse />} />
           </Routes>
         </AuthProvider>
       </Router>

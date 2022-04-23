@@ -47,9 +47,37 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function SearchManga(props) {
+export default function SearchManga(props) {
   const [manga, setMangas] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+
+  const getMangaRequest = async () => {
+    const url = `https://kitsu.io/api/edge/manga?filter[text]=${searchValue}`;
+    const response = await fetch(url);
+    const responseJson = await response.json();
+    console.log(responseJson.data);
+    if (responseJson.data) {
+      setMangas(responseJson.data);
+    }
+  };
+
+  useEffect(() => {
+    console.log('searchtemp is this working');
+    const delaySearch = setTimeout(() => {
+      getMangaRequest(searchValue);
+    }, 500);
+    return () => clearTimeout(delaySearch);
+  }, [searchValue]);
+
+  const handleKeyPress = (e) => {
+    // e.preventDefault();
+
+    if (e.key === 'Enter') {
+      //   console.log('what is this', props);
+      setSearchValue(e.target.value);
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <SearchBar>
@@ -59,11 +87,10 @@ function SearchManga(props) {
         <StyledInputBase
           placeholder="Search…"
           inputProps={{ 'aria-label': 'search' }}
-          onChange={(e) => props.setSearchValue(e.target.value)}
+          onKeyPress={handleKeyPress}
         />
       </SearchBar>
+      <MangaList mangas={manga} />
     </Box>
   );
 }
-
-export default SearchManga;

@@ -20,11 +20,15 @@ const MangaList = (props) => {
           }}
         >
           {props.mangas.map((manga, index) => (
-            <a href={manga.links.self}>
+            // <a href={manga.links.self}>
+            <Link to={manga.links.self} style={{ textDecoration: 'none' }}>
               <Card
                 sx={{
                   p: 3,
-                  maxWidth: 120,
+                  width: 200,
+                  maxWidth: 200,
+                  height: 380,
+                  maxHeight: 380,
                   ':hover': {
                     boxShadow: 20,
                   },
@@ -32,8 +36,7 @@ const MangaList = (props) => {
               >
                 <CardMedia
                   component="img"
-                  height="140"
-                  image={manga.attributes.posterImage.tiny}
+                  image={manga.attributes.posterImage.small}
                   alt="pic"
                 />
                 <CardContent>
@@ -42,7 +45,8 @@ const MangaList = (props) => {
                   </Typography>
                 </CardContent>
               </Card>
-            </a>
+              {/* </a> */}
+            </Link>
           ))}
         </Grid>
       </Grid>
