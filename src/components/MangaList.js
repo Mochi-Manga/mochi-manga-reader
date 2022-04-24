@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { Key } from '@mui/icons-material';
 
 const MangaList = (props) => {
   return (
@@ -20,8 +21,8 @@ const MangaList = (props) => {
           }}
         >
           {props.mangas.map((manga, index) => (
-            // <a href={manga.links.self}>
-            <Link to={manga.links.self} style={{ textDecoration: 'none' }}>
+            // <a href={}>
+            <Link to={'MangaPage'} style={{ textDecoration: 'none' } }>
               <Card
                 sx={{
                   p: 3,

@@ -25,7 +25,7 @@ function MangaCardPoster() {
      }}>
       {posters.map((poster) => {
         return (
-          <div className='manga-card'>
+          <div className='manga-card'key={poster.id}>
           <MangaCard poster={poster} />
           </div>
         )
