@@ -6,13 +6,20 @@ import { AuthProvider } from './contexts/Auth';
 import MangaApi from './services/MangaAPI';
 import { supabase } from './supabaseClient';
 import { Dashboard } from './pages/Account';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import MangaCardPoster from './components/MangaCardPoster';
 import SearchManga from './pages/Search';
 import Main from './pages/Main';
 import Browse from './pages/Browse';
+import MangaInfo from './components/MangaInfo';
+import MangaCard from './components/MangaCard';
 
 export default function App(props) {
   const [data, setData] = useState({});
@@ -20,9 +27,20 @@ export default function App(props) {
   const [manga, setMangas] = useState([]);
   const [searchValue, setSearchValue] = useState('');
 
+  // const fetchData = async () => {
+  //   const response = await MangaApi(1);
+  //   console.log('app:', response.data);
+  //   setData(response.data.data);
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
   const fetchData = async () => {
-    const response = await MangaApi();
-    setData(response.data.data);
+    const response = await MangaApi(1);
+    console.log('app:', response.data);
+    setData(response.data);
   };
 
   useEffect(() => {
@@ -47,7 +65,7 @@ export default function App(props) {
   //   }, 500);
   //   return () => clearTimeout(delaySearch);
   // }, [searchValue]);
-  
+
   useEffect(() => {
     setSession(supabase.auth.session());
 
@@ -62,15 +80,30 @@ export default function App(props) {
       <Router>
         <AuthProvider>
           <Routes>
+            <Route path="/" element={<Navigate to="/home" replace />} />
             <Route
               exact
               path="/home"
               element={
                 <>
                   <Main />
-                  <MangaCardPoster dataFromApp={data} />
+                  <MangaCardPoster />
                 </>
               }
+            />
+            <Route
+              exact
+              path="/manga"
+              element={<MangaCard datafromApp={data} />}
+              /* <Route
+              exact
+              path="/manga/:id"
+              element={
+                <>
+                  <Main />
+                  <MangaCardPoster dataFromApp={data} />
+                </>
+              } */
             />
             <Route
               exact
