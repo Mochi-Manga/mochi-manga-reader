@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import MangaCard from './MangaCard';
 import MangaApi from '../services/MangaAPI';
 import { Box } from '@mui/material';
+import MangaCardInfo from './MangaCardInfo';
 
-function MangaCardPoster() {
+function MangaCardPoster(id) {
   const [posters, setPosters] = useState([]);
   const fetchData = async () => {
-    const response = await MangaApi();
+    const response = await MangaApi(id);
     console.log('response from mangaposter', response);
     setPosters(response.data.data);
   };
@@ -30,7 +31,7 @@ function MangaCardPoster() {
       {posters.map((poster) => {
         return (
           <div className="manga-card">
-            <MangaCard poster={poster} />
+            <MangaCardInfo poster={poster} />
           </div>
         );
       })}

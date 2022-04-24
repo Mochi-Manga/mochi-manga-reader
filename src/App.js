@@ -18,8 +18,7 @@ import MangaCardPoster from './components/MangaCardPoster';
 import SearchManga from './pages/Search';
 import Main from './pages/Main';
 import Browse from './pages/Browse';
-import MangaInfo from './components/MangaInfo';
-import MangaCard from './components/MangaCard';
+import MangaCardInfo from './components/MangaCardInfo';
 
 export default function App(props) {
   const [data, setData] = useState({});
@@ -93,8 +92,8 @@ export default function App(props) {
             />
             <Route
               exact
-              path="/manga"
-              element={<MangaCard datafromApp={data} />}
+              path="/manga/:id"
+              element={<MangaCardInfo />}
               /* <Route
               exact
               path="/manga/:id"

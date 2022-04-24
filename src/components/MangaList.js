@@ -1,14 +1,18 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 const MangaList = (props) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [id, setId] = useState();
+  // console.log('props:', props.mangas[0]);
 
-  const clickForId = () => {
+  const clickForId = (e) => {
+    console.log(e);
+    console.log(e.target.id);
+    console.log(e.currentTarget.id);
     // setId();
     // navigate('/manga/:id');
     console.log('click');
@@ -32,11 +36,12 @@ const MangaList = (props) => {
         >
           {props.mangas.map((manga, index) => (
             // <a href={manga.links.self}>
-            <Link
-              to={manga.id}
-              style={{ textDecoration: 'none' }}
-              onClick={clickForId}
-            >
+            // <Link
+            //   to={{ pathname: '/manga' }}
+            //   style={{ textDecoration: 'none' }}
+            //   onClick={clickForId}
+            // >
+            <Link to={`/manga/${manga.id}`}>
               <div>
                 <Card
                   sx={{
@@ -49,6 +54,7 @@ const MangaList = (props) => {
                       boxShadow: 20,
                     },
                   }}
+                  mangaId={manga.id}
                 >
                   <CardMedia
                     component="img"

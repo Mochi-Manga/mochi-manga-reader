@@ -10,7 +10,7 @@ import moment from 'moment';
 import SaveFavorite from './SaveFavorite';
 
 export default function MangaCard({ poster }) {
-  console.log('mangacard', poster);
+  console.log(poster);
   return (
     <Card sx={{ maxWidth: 400 }} className="card">
       <CardContent>

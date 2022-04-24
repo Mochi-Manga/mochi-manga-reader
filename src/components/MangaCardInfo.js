@@ -1,42 +1,51 @@
-import React, { useState } from 'react';
-// import Box from '@mui/material/Box';
+import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { supabase } from '../supabaseClient';
-import moment from 'moment';
-import SaveFavorite from './SaveFavorite';
+// import SaveFavoriteBtn from './SaveFavoriteBtn';
+import { Container } from '@mui/material';
+import MangaApi from '../services/MangaAPI';
+import { useLocation, useParams } from 'react-router-dom';
 
-export default function MangaCard({ poster }) {
-  console.log('mangacard', poster);
+export default function MangaCardInfo({ props }) {
+  //   console.log(id);
+  const { id } = useParams();
+  console.log(id);
+  const [poster, setPoster] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://kitsu.io/api/edge/manga/${id}`).then((response) =>
+      response.json().then((response) => {
+        console.log(response.data);
+        setPoster(response.data);
+      })
+    );
+  }, []);
+
   return (
-    <Card sx={{ maxWidth: 400 }} className="card">
+    <Container sx={{ maxWidth: 2000 }} className="card">
       <CardContent>
         <Typography variant="h5" component="div" className="title">
-          {poster.attributes.canonicalTitle}
+          {/* {poster.attributes.canonicalTitle} */}
         </Typography>
-        <img src={poster.attributes.posterImage.medium} alt="manga img"></img>
+        {/* <img src={poster.attributes.posterImage.large} alt="manga img"></img> */}
         <Typography
           variant="body2"
           sx={{
             textOverflow: 'ellipsis',
             overflow: 'hidden',
-            height: '300px',
             whiteSpace: 'wrap',
           }}
         >
           Synopsis
           <br></br>
-          {poster.attributes.synopsis}
+          {/* {poster.attributes.synopsis} */}
         </Typography>
       </CardContent>
-      <SaveFavorite />
       <CardActions>
-        {/* <SaveFavorite /> */}
-        {/* <Button size="small">Save2Fave</Button> */}
+        {/* <SaveFavoriteBtn posterId={poster.id} /> */}
       </CardActions>
-    </Card>
+    </Container>
   );
 }
