@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Key } from '@mui/icons-material';
 
 const MangaList = (props) => {
+
   return (
     <Grid
       sx={{ flexGrow: 1, paddingTop: 0, paddingRight: 5, paddingLeft: 5 }}
@@ -21,8 +22,7 @@ const MangaList = (props) => {
           }}
         >
           {props.mangas.map((manga, index) => (
-            // <a href={}>
-            <Link to={'MangaPage'} style={{ textDecoration: 'none' } }>
+            <Link to={{pathname: "/MangaPage", state: {hi: 'hi'}}}>
               <Card
                 sx={{
                   p: 3,

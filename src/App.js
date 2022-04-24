@@ -13,6 +13,7 @@ import MangaCardPoster from './components/MangaCardPoster';
 import SearchManga from './pages/Search';
 import Main from './pages/Main';
 import Browse from './pages/Browse';
+import MangaPage from './pages/MangaPage';
 
 export default function App(props) {
   const [data, setData] = useState({});
@@ -107,6 +108,7 @@ export default function App(props) {
             />
             <Route exact path="/search" element={<SearchManga />} />
             <Route exact path="/browse" element={<Browse />} />
+            <Route exact path="/mangapage" element={<MangaPage />} />
           </Routes>
         </AuthProvider>
       </Router>
