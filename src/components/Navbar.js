@@ -253,7 +253,7 @@ export default function Navbar(props, searchValue) {
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu} */}
-      {renderMenu}
+      {/* {renderMenu} */}
     </Box>
   );
 }

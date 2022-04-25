@@ -41,14 +41,14 @@ export default function App(props) {
     }
   };
 
-  useEffect(() => {
-    console.log('is this working');
-    const delaySearch = setTimeout(() => {
-      getMangaRequest(searchValue);
-    }, 500);
-    return () => clearTimeout(delaySearch);
-  }, [searchValue]);
-
+  // useEffect(() => {
+  //   console.log('is this working');
+  //   const delaySearch = setTimeout(() => {
+  //     getMangaRequest(searchValue);
+  //   }, 500);
+  //   return () => clearTimeout(delaySearch);
+  // }, [searchValue]);
+  
   useEffect(() => {
     setSession(supabase.auth.session());
 

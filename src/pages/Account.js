@@ -3,16 +3,13 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { deepPurple } from '@mui/material/colors';
 import MangaPage from './MangaPage';
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/Auth';
-import { FlashOnOutlined } from '@mui/icons-material';
+
 import {
   Box,
   Container,
-  FormControl,
-  InputLabel,
   Button,
   Input,
   Typography,
@@ -35,7 +32,7 @@ export function Dashboard({ session }) {
   const [favMangas, setFavMangas] = useState([]);
   let favMangasArr = [];
 
-  console.log('user', user);
+  // console.log('user', user);
 
   async function getProfile() {
     try {

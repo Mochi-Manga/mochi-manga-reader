@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import MangaList from '../components/MangaList';
 import MangaSearchApi from '../services/MangaSearchAPI';
 
