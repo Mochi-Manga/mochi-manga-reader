@@ -9,62 +9,59 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
-
 const MangaPage = () => {
   const [poster, setPoster] = useState(null);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  // const 
-  // const fetchData = () => {
-  //   const response = axios.get(`https://kitsu.io/api/edge/manga/${id}`);
-  //   console.log('response', response);
-  //   setPoster(response);
-  //   setLoading(false);
-  // }
-  
+
   useEffect(() => {
     const response = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
         const data = await axios.get(`https://kitsu.io/api/edge/manga/${id}`);
-        console.log('data line 30 ', data)
-        setPoster({data});
+        console.log('data line 30 ', data);
+        setPoster({ data });
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.log('error ', error)
-      }}
+        console.log('error ', error);
+      }
+    };
     response();
-  },[])
+  }, []);
 
   if (loading) {
-    return (
-      <span>Loading</span>
-    )
-  };
+    return <span>Loading</span>;
+  }
   return (
     <Container sx={{ maxWidth: 2000 }} className="card">
       <CardContent>
-        <Typography variant="h5" component="div" className='title'>
+        <Typography variant="h5" component="div" className="title">
           {console.log('poster line 50 ', poster)}
           {poster.data.data.data.attributes.canonicalTitle}
         </Typography>
-        <img src={poster.data.data.data.attributes.posterImage.large} alt='manga img'></img>
-        <Typography variant="body2" sx={{
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-          whiteSpace: 'wrap'
-          }}>
+        <img
+          src={poster.data.data.data.attributes.posterImage.large}
+          alt="manga img"
+        ></img>
+        <Typography
+          variant="body2"
+          sx={{
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            whiteSpace: 'wrap',
+          }}
+        >
           Synopsis
           <br></br>
           {poster.data.data.data.attributes.synopsis}
         </Typography>
       </CardContent>
       <CardActions>
-        {/* <SaveFavoriteBtn posterId={poster.id} /> */}
+        <SaveFavoriteBtn posterId={poster.data.data.data.id} />
       </CardActions>
     </Container>
   );
-}
+};
 
-export default MangaPage
+export default MangaPage;

@@ -54,11 +54,17 @@ function Main() {
             Adventure:
           </Typography>
           <MangaList mangas={mangaAd} />
-          <Typography sx={{ paddingTop: 5, paddingBottom: 0 }} variant="h5">
+          <Typography
+            sx={{ paddingTop: 5, paddingBottom: 0, paddingLeft: 5 }}
+            variant="h5"
+          >
             Comedy:
           </Typography>
           <MangaList mangas={mangaCom} />
-          <Typography sx={{ paddingTop: 5, paddingBottom: 0 }} variant="h5">
+          <Typography
+            sx={{ paddingTop: 5, paddingBottom: 0, paddingLeft: 5 }}
+            variant="h5"
+          >
             Romance:
           </Typography>
           <MangaList mangas={mangaRom} />

@@ -14,13 +14,10 @@ import SearchManga from './pages/Search';
 import Main from './pages/Main';
 import Browse from './pages/Browse';
 import MangaPage from './pages/MangaPage';
-import MangaCard from './components/MangaCard';
-import MangaCardInfo from './components/MangaCardInfo';
 
 export default function App(props) {
   const [data, setData] = useState({});
   const [session, setSession] = useState(null);
-  const [manga, setMangas] = useState([]);
   const [searchValue, setSearchValue] = useState('');
 
   const fetchData = async () => {
@@ -50,7 +47,7 @@ export default function App(props) {
   //   }, 500);
   //   return () => clearTimeout(delaySearch);
   // }, [searchValue]);
-  
+
   useEffect(() => {
     setSession(supabase.auth.session());
 
@@ -65,27 +62,13 @@ export default function App(props) {
       <Router>
         <AuthProvider>
           <Routes>
-          <Route
-              exact
-              path="/manga/:id"
-              element={<MangaPage />}
-              /* <Route
-              exact
-              path="/manga/:id"
-              element={
-                <>
-                  <Main />
-                  <MangaCardPoster dataFromApp={data} />
-                </>
-              } */
-            />
+            <Route exact path="/manga/:id" element={<MangaPage />} />
             <Route
               exact
               path="/home"
               element={
                 <>
                   <Main />
-                  <MangaCardPoster dataFromApp={data} />
                 </>
               }
             />
