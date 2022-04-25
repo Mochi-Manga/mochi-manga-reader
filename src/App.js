@@ -13,12 +13,13 @@ import MangaCardPoster from './components/MangaCardPoster';
 import SearchManga from './pages/Search';
 import Main from './pages/Main';
 import Browse from './pages/Browse';
+import MangaPage from './pages/MangaPage';
 
 export default function App(props) {
   const [data, setData] = useState({});
   const [session, setSession] = useState(null);
-  const [manga, setMangas] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [mangas, setMangas] = useState();
 
   const fetchData = async () => {
     const response = await MangaApi();
@@ -29,16 +30,16 @@ export default function App(props) {
     fetchData();
   }, []);
 
-  // const getMangaRequest = async () => {
-  //   const url = `https://kitsu.io/api/edge/manga?filter[text]=${searchValue}`;
-  //   const response = await fetch(url);
-  //   const responseJson = await response.json();
-  //   console.log(responseJson.data);
+  const getMangaRequest = async () => {
+    const url = `https://kitsu.io/api/edge/manga?filter[text]=${searchValue}`;
+    const response = await fetch(url);
+    const responseJson = await response.json();
+    console.log(responseJson.data);
 
-  //   if (responseJson.data) {
-  //     setMangas(responseJson.data);
-  //   }
-  // };
+    if (responseJson.data) {
+      setMangas(responseJson.data);
+    }
+  };
 
   // useEffect(() => {
   //   console.log('is this working');
@@ -47,7 +48,7 @@ export default function App(props) {
   //   }, 500);
   //   return () => clearTimeout(delaySearch);
   // }, [searchValue]);
-
+  
   useEffect(() => {
     setSession(supabase.auth.session());
 
@@ -62,13 +63,13 @@ export default function App(props) {
       <Router>
         <AuthProvider>
           <Routes>
+            <Route exact path="/manga/:id" element={<MangaPage />} />
             <Route
               exact
               path="/home"
               element={
                 <>
                   <Main />
-                  <MangaCardPoster dataFromApp={data} />
                 </>
               }
             />
@@ -105,8 +106,13 @@ export default function App(props) {
                 )
               }
             />
-            <Route exact path="/search" element={<SearchManga />} />
+            <Route
+              exact
+              path="/search"
+              element={<SearchManga searchValue={searchValue} />}
+            />
             <Route exact path="/browse" element={<Browse />} />
+            <Route exact path="/mangapage" element={<MangaPage />} />
           </Routes>
         </AuthProvider>
       </Router>

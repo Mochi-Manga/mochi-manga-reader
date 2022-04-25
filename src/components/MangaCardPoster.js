@@ -7,31 +7,34 @@ function MangaCardPoster() {
   const [posters, setPosters] = useState([]);
   const fetchData = async () => {
     const response = await MangaApi();
-    console.log(response);
     setPosters(response.data.data);
-  }
+  };
   useEffect(() => {
     fetchData();
-  },[]) 
+  }, []);
 
   return (
-    <Box className='manga-row' sx={{ 
-      display: 'flex',
-      flexWrap: 'wrap',
-      flex: '1',
-      justifyContent: 'space-between',
-      padding: '10px',
-      gap: '10px'
-     }}>
+    <Box
+      className="manga-row"
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        flex: '1',
+        justifyContent: 'space-between',
+        padding: '10px',
+        gap: '10px',
+      }}
+    >
       {posters.map((poster) => {
         return (
-          <div className='manga-card'key={poster.id}>
-          <MangaCard poster={poster} />
+          <div className="manga-card">
+            {console.log(poster)}
+            <MangaCard poster={poster} />
           </div>
-        )
+        );
       })}
     </Box>
-    )
+  );
 }
 
-export default MangaCardPoster
+export default MangaCardPoster;

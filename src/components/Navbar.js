@@ -57,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar(props) {
+export default function Navbar(props, searchValue) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -102,7 +102,8 @@ export default function Navbar(props) {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       console.log(e.target.value);
-      props.setSearchValue(e.target.value);
+      console.log(searchValue);
+      props.setSearchValue(searchValue);
     }
   };
 
