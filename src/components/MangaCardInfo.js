@@ -4,23 +4,29 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 // import SaveFavoriteBtn from './SaveFavoriteBtn';
-import { Container } from '@mui/material';
+import { Container, responsiveFontSizes } from '@mui/material';
 import MangaApi from '../services/MangaAPI';
 import { useLocation, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 export default function MangaCardInfo({ props }) {
   //   console.log(id);
   const { id } = useParams();
   console.log(id);
-  const [poster, setPoster] = useState([]);
+  const [poster, setPoster] = useState();
+  const [loading, setLoading] = useState();
+
+  const getMangaIdInfo = async () => {
+    const idUrl = `https://kitsu.io/api/edge/manga/${id}`;
+    const getIdInfo = await axios.get(idUrl);
+    // console.log('response', response);
+    console.log(getIdInfo);
+    setPoster(getIdInfo.data.data);
+    console.log('poster', poster);
+  };
 
   useEffect(() => {
-    fetch(`https://kitsu.io/api/edge/manga/${id}`).then((response) =>
-      response.json().then((response) => {
-        console.log(response.data);
-        setPoster(response.data);
-      })
-    );
+    getMangaIdInfo();
   }, []);
 
   return (
