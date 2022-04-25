@@ -47,7 +47,7 @@ export default function App(props) {
   //   }, 500);
   //   return () => clearTimeout(delaySearch);
   // }, [searchValue]);
-  
+
   useEffect(() => {
     setSession(supabase.auth.session());
 

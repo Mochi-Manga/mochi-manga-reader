@@ -184,7 +184,7 @@ export default function Navbar(props) {
           >
             Mochi Manga
           </Typography>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -193,7 +193,7 @@ export default function Navbar(props) {
               inputProps={{ 'aria-label': 'search' }}
               onKeyPress={handleKeyPress}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -225,7 +225,7 @@ export default function Navbar(props) {
                 </Button>
               </Link>
             </Box>
-            <IconButton
+            {/* <IconButton
               size="large"
               edge="end"
               aria-label="account of current user"
@@ -235,7 +235,7 @@ export default function Navbar(props) {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
           </Box>
           {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -252,7 +252,7 @@ export default function Navbar(props) {
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu} */}
-      {renderMenu}
+      {/* {renderMenu} */}
     </Box>
   );
 }
