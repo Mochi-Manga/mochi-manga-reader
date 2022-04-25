@@ -3,11 +3,11 @@ import MangaCard from './MangaCard';
 import MangaApi from '../services/MangaAPI';
 import { Box } from '@mui/material';
 
+
 function MangaCardPoster() {
   const [posters, setPosters] = useState([]);
   const fetchData = async () => {
     const response = await MangaApi();
-    console.log(response);
     setPosters(response.data.data);
   }
   useEffect(() => {
@@ -25,13 +25,14 @@ function MangaCardPoster() {
      }}>
       {posters.map((poster) => {
         return (
-          <div className='manga-card'key={poster.id}>
-          <MangaCard poster={poster} />
+          <div className='manga-card'>
+          <MangaCard poster={poster}/>
           </div>
         )
       })}
     </Box>
     )
 }
+
 
 export default MangaCardPoster

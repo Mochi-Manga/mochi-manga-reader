@@ -1,9 +1,12 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Key } from '@mui/icons-material';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 const MangaList = (props) => {
+  // const navigate = useNavigate();
+  const [id, setId] = useState();
 
   return (
     <Grid
@@ -22,31 +25,40 @@ const MangaList = (props) => {
           }}
         >
           {props.mangas.map((manga, index) => (
-            <Link to={{pathname: "/MangaPage", state: {hi: 'hi'}}}>
-              <Card
-                sx={{
-                  p: 3,
-                  width: 200,
-                  maxWidth: 200,
-                  height: 380,
-                  maxHeight: 380,
-                  ':hover': {
-                    boxShadow: 20,
-                  },
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  image={manga.attributes.posterImage.small}
-                  alt="pic"
-                />
-                <CardContent>
-                  <Typography style={{ wordWrap: 'break-word' }} variant="p">
-                    {manga.attributes.canonicalTitle}
-                  </Typography>
-                </CardContent>
-              </Card>
-              {/* </a> */}
+            // <a href={manga.links.self}>
+            // <Link
+            //   to={{ pathname: '/manga' }}
+            //   style={{ textDecoration: 'none' }}
+            //   onClick={clickForId}
+            // >
+            <Link to={`/manga/${manga.id}`}>
+              <div>
+                <Card
+                  sx={{
+                    p: 3,
+                    width: 200,
+                    maxWidth: 200,
+                    height: 380,
+                    maxHeight: 380,
+                    ':hover': {
+                      boxShadow: 20,
+                    },
+                  }}
+                  mangaId={manga.id}
+                >
+                  <CardMedia
+                    component="img"
+                    image={manga.attributes.posterImage.small}
+                    alt="pic"
+                  />
+                  <CardContent>
+                    <Typography style={{ wordWrap: 'break-word' }} variant="p">
+                      {manga.attributes.canonicalTitle}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </div>
+              {/* // </a> */}
             </Link>
           ))}
         </Grid>

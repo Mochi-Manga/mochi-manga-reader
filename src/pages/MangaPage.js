@@ -1,23 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import SaveFavoriteBtn from '../components/SaveFavoriteBtn';
 import { Container } from '@mui/material';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { render } from '@testing-library/react';
 
 
-export default function MangaPage(props) {
-  console.log(props);
+const MangaPage = () => {
+  const [poster, setPoster] = useState(null);
+  const [loading, setLoading] = useState(true)
+  const { id } = useParams();
+  // const 
+  // const fetchData = () => {
+  //   const response = axios.get(`https://kitsu.io/api/edge/manga/${id}`);
+  //   console.log('response', response);
+  //   setPoster(response);
+  //   setLoading(false);
+  // }
+  
+  useEffect(() => {
+    const response = async () => {
+      setLoading(true)
+      try {
+        const data = await axios.get(`https://kitsu.io/api/edge/manga/${id}`);
+        console.log('data line 30 ', data)
+        setPoster({data});
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log('error ', error)
+      }}
+    response();
+  },[])
 
+  if (loading) {
+    return (
+      <span>Loading</span>
+    )
+  };
   return (
     <Container sx={{ maxWidth: 2000 }} className="card">
       <CardContent>
         <Typography variant="h5" component="div" className='title'>
-          Test
-          {/* {poster.attributes.canonicalTitle} */}
+          {console.log('poster line 50 ', poster)}
+          {poster.data.data.data.attributes.canonicalTitle}
         </Typography>
-        {/* <img src={poster.attributes.posterImage.large} alt='manga img'></img> */}
+        <img src={poster.data.data.data.attributes.posterImage.large} alt='manga img'></img>
         <Typography variant="body2" sx={{
           textOverflow: 'ellipsis',
           overflow: 'hidden',
@@ -25,7 +57,7 @@ export default function MangaPage(props) {
           }}>
           Synopsis
           <br></br>
-          {/* {poster.attributes.synopsis} */}
+          {poster.data.data.data.attributes.synopsis}
         </Typography>
       </CardContent>
       <CardActions>
@@ -34,3 +66,5 @@ export default function MangaPage(props) {
     </Container>
   );
 }
+
+export default MangaPage
