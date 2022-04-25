@@ -57,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar(props) {
+export default function Navbar(props, searchValue) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -102,7 +102,8 @@ export default function Navbar(props) {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       console.log(e.target.value);
-      props.setSearchValue(e.target.value);
+      console.log(searchValue);
+      props.setSearchValue(searchValue);
     }
   };
 
@@ -184,7 +185,7 @@ export default function Navbar(props) {
           >
             Mochi Manga
           </Typography>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -193,7 +194,7 @@ export default function Navbar(props) {
               inputProps={{ 'aria-label': 'search' }}
               onKeyPress={handleKeyPress}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -225,7 +226,7 @@ export default function Navbar(props) {
                 </Button>
               </Link>
             </Box>
-            <IconButton
+            {/* <IconButton
               size="large"
               edge="end"
               aria-label="account of current user"
@@ -235,7 +236,7 @@ export default function Navbar(props) {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
           </Box>
           {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
