@@ -25,13 +25,15 @@ import {
   FormControlLabel,
   Checkbox,
 } from '@mui/material';
+import axios from 'axios';
+import MangaCard from '../components/MangaCard';
 
 export function Dashboard({ session }) {
   const { user, signOut } = useAuth();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState();
-  const [favMangas, setFavMangas] = useState();
-  let favMangaIdarray = [];
+  const [favMangas, setFavMangas] = useState([]);
+  let favMangasArr = [];
 
   console.log('user', user);
 
@@ -58,11 +60,12 @@ export function Dashboard({ session }) {
   }
 
   async function getFavMangas() {
+    setLoading(true);
     try {
       const user = supabase.auth.user();
       let { data, error, status } = await supabase
         .from('favorite_manga')
-        .select(`manga_id, user_id`)
+        .select(`manga_id`)
         .eq('user_id', user.id);
 
       if (error && status !== 406) {
@@ -70,20 +73,20 @@ export function Dashboard({ session }) {
       }
 
       if (data) {
-        // data is one array of multiple objects
-        data.forEach((row) => {
-          console.log('row', row.manga_id);
-          favMangaIdarray.push(row.manga_id);
-        });
-        console.log(favMangaIdarray);
-        // setFavMangas(favMangaIdarray);
-        // data.map((row) => {
-        //   console.log('mangaid', row.manga_id);
-        //   setFavMangas({ ...favMangas, mangaid: row.manga_id });
-        //   console.log(favMangas);
-        // });
+        console.log(data);
+        for (const mangaid of data) {
+          const data = await axios.get(
+            `https://kitsu.io/api/edge/manga/${mangaid.manga_id}`
+          );
+          console.log(mangaid);
+          favMangasArr.push(data.data.data);
+        }
+        console.log('mangaids:', favMangasArr);
+        setFavMangas(favMangasArr);
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       alert(error.message);
     }
   }
@@ -102,6 +105,19 @@ export function Dashboard({ session }) {
     await signOut();
 
     navigate('/login');
+  }
+
+  const renderFavMangas = () => {
+    return favMangas.map((favManga) => {
+      {
+        console.log(favManga);
+      }
+      <MangaCard favManga={favManga} />;
+    });
+  };
+
+  if (loading) {
+    return <span>Loading</span>;
   }
 
   return (
@@ -125,7 +141,38 @@ export function Dashboard({ session }) {
           </Grid>
           <Button onClick={handleSignOut}>Sign Out</Button>
         </Box>
-        <Typography>Favorite Mangas: {favMangaIdarray}</Typography>
+        <Typography>
+          Favorite Mangas: {renderFavMangas()}
+          {/* {favMangas.map((favManga) => {
+            return (
+              <div className="manga-card">
+                {renderFavMangas}
+                <MangaCard favManga={favManga} />
+                {console.log(favManga)}
+              </div>
+            );
+          })} */}
+          <Box
+            className="manga-row"
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              flex: '1',
+              justifyContent: 'space-between',
+              padding: '10px',
+              gap: '10px',
+            }}
+          >
+            {favMangas.map((favManga) => {
+              return (
+                <div className="manga-card">
+                  {/* {console.log(poster)} */}
+                  <MangaCard poster={favManga} />
+                </div>
+              );
+            })}
+          </Box>
+        </Typography>
       </Box>
     </Container>
   );
