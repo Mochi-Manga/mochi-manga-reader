@@ -4,19 +4,12 @@ import { useAuth } from '../contexts/Auth';
 import {
   Box,
   Container,
-  FormControl,
-  InputLabel,
   Button,
-  Input,
   Typography,
-  Stack,
   TextField,
   Grid,
-  Paper,
   CssBaseline,
   Avatar,
-  FormControlLabel,
-  Checkbox,
 } from '@mui/material';
 import moment from 'moment';
 import { supabase } from '../supabaseClient';
@@ -24,9 +17,7 @@ import { supabase } from '../supabaseClient';
 export function Signup() {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
-  const [confirmPassword, setconfirmPassword] = useState('');
   const [username, setusername] = useState('');
-  const [errorMessage, seterrorMessage] = useState(null);
 
   // Get signup function from auth context
   const { signUp } = useAuth();
@@ -36,7 +27,7 @@ export function Signup() {
   async function SignUpUser(e) {
     // Get email and password input val
     e.preventDefault();
-    const { user, session, error } = await signUp({
+    const { user } = await signUp({
       email,
       password,
     });

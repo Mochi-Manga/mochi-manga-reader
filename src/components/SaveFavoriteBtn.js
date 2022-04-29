@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
-import { render } from '@testing-library/react';
-import { ConstructionOutlined } from '@mui/icons-material';
 import { supabase } from '../supabaseClient';
-import moment from 'moment';
 import { useAuth } from '../contexts/Auth';
 
 export default function SaveFavoriteBtn({ posterId }) {
   const { user } = useAuth();
-  const [favorite, setFavorite] = useState(null);
+  // const [favorite, setFavorite] = useState(null);
 
   async function saveToFave(e) {
     e.preventDefault();

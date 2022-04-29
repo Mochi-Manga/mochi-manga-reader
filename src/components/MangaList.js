@@ -1,13 +1,8 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
 
 const MangaList = (props) => {
-  // const navigate = useNavigate();
-  const [id, setId] = useState();
-
   return (
     <Grid
       sx={{ flexGrow: 1, paddingTop: 0, paddingRight: 5, paddingLeft: 5 }}

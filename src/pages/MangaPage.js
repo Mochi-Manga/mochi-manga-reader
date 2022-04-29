@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -7,7 +6,6 @@ import SaveFavoriteBtn from '../components/SaveFavoriteBtn';
 import { Container } from '@mui/material';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { render } from '@testing-library/react';
 
 const MangaPage = () => {
   const [poster, setPoster] = useState(null);

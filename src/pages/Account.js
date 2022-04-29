@@ -1,8 +1,6 @@
 // import { Box, Avatar } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
-import { deepPurple } from '@mui/material/colors';
-import MangaPage from './MangaPage';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/Auth';
@@ -11,22 +9,15 @@ import {
   Box,
   Container,
   Button,
-  Input,
   Typography,
-  Stack,
-  TextField,
   Grid,
-  Paper,
-  CssBaseline,
   Avatar,
-  FormControlLabel,
-  Checkbox,
 } from '@mui/material';
 import axios from 'axios';
 import MangaCard from '../components/MangaCard';
 
 export function Dashboard({ session }) {
-  const { user, signOut } = useAuth();
+  const { signOut } = useAuth();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState();
   const [favMangas, setFavMangas] = useState([]);
