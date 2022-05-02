@@ -30,7 +30,7 @@ export function Dashboard({ session }) {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState();
   const [favMangas, setFavMangas] = useState([]);
-  let favMangasArr = [];
+
 
   // console.log('user', user);
 
@@ -57,6 +57,7 @@ export function Dashboard({ session }) {
   }
 
   async function getFavMangas() {
+    let favMangasArr = [];
     setLoading(true);
     try {
       const user = supabase.auth.user();
