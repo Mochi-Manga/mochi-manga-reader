@@ -5,15 +5,13 @@ const Posters = (props) => {
   const [posters, setPosters] = useState([])
   useEffect(async () => {
     const manga = await axios.get('https://kitsu.io/api/edge/manga');
-    console.log(mangaMeta);
     const mangaData = manga.data.data;
     const posterArray = [];
     mangaData.forEach(element => {
       posterArray.push(element.attributes.posterImage.medium)
     });
-    console.log(posterArray);
     setPosters(posterArray)
-  });
+  }, []);
 
   return (
     <div>

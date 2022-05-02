@@ -31,9 +31,6 @@ export function Dashboard({ session }) {
   const [username, setUsername] = useState();
   const [favMangas, setFavMangas] = useState([]);
 
-
-  // console.log('user', user);
-
   async function getProfile() {
     try {
       const user = supabase.auth.user();
@@ -53,7 +50,6 @@ export function Dashboard({ session }) {
     } catch (error) {
       alert(error.message);
     }
-    console.log('username', username);
   }
 
   async function getFavMangas() {

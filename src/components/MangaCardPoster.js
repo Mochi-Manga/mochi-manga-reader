@@ -28,7 +28,6 @@ function MangaCardPoster() {
       {posters.map((poster) => {
         return (
           <div className="manga-card">
-            {console.log(poster)}
             <MangaCard poster={poster} />
           </div>
         );
