@@ -101,8 +101,6 @@ export default function Navbar(props, searchValue) {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      console.log(e.target.value);
-      console.log(searchValue);
       props.setSearchValue(searchValue);
     }
   };

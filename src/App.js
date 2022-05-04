@@ -34,7 +34,6 @@ export default function App(props) {
     const url = `https://kitsu.io/api/edge/manga?filter[text]=${searchValue}`;
     const response = await fetch(url);
     const responseJson = await response.json();
-    console.log(responseJson.data);
 
     if (responseJson.data) {
       setMangas(responseJson.data);
@@ -42,7 +41,6 @@ export default function App(props) {
   };
 
   // useEffect(() => {
-  //   console.log('is this working');
   //   const delaySearch = setTimeout(() => {
   //     getMangaRequest(searchValue);
   //   }, 500);

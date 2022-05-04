@@ -10,8 +10,6 @@ import Typography from '@mui/material/Typography';
 import SaveFavoriteBtn from './SaveFavoriteBtn';
 
 export default function MangaCard({poster}) {
-
-
   return (
     <Card sx={{ maxWidth: 400 }} className="card">
       <CardContent>

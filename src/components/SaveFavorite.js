@@ -5,7 +5,6 @@ import { ConstructionOutlined } from '@mui/icons-material';
 
 export default async function saveFavorite(posterId) {
   const user = supabase.auth.user();
-  console.log(user);
   const { save, error } = await supabase.from('favorite_manga').insert([
     {
       id: user,

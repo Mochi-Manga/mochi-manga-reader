@@ -12,7 +12,6 @@ export default function SaveFavoriteBtn({ posterId }) {
 
   async function saveToFave(e) {
     e.preventDefault();
-    console.log('posterId', posterId);
     const { favorite, error } = await supabase.from('favorite_manga').insert([
       {
         user_id: user.id,
