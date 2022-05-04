@@ -50,8 +50,6 @@ export function Signup() {
         website: null,
       },
     ]);
-    console.log(superbaseResponse);
-    // console.log(response);
     // confirmPassword === password
     //   ? signUp({ email, password, username })
     //   : seterrorMessage('PASSWORDS_DONT_MATCH');

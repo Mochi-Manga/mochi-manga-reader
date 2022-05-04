@@ -68,6 +68,7 @@ export default function App(props) {
               element={
                 <>
                   <Main />
+                  <MangaCardPoster />
                 </>
               }
             />

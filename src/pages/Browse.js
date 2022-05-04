@@ -10,7 +10,7 @@ function Browse(props) {
     const genres = `https://kitsu.io/api/edge/genres`;
     axios.get(genres).then(function (response) {
       const allGenres = response.data.data;
-      console.log(allGenres);
+      // console.log(allGenres);
       setGenre(allGenres);
     });
   };
@@ -30,7 +30,7 @@ function Browse(props) {
   }, []);
 
   const genreList = () => {
-    console.log('click');
+    // console.log('click');
   };
 
   return (

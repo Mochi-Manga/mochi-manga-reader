@@ -30,6 +30,8 @@ export function Dashboard({ session }) {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState();
   const [favMangas, setFavMangas] = useState([]);
+  let favMangasArr = [];
+  const uniqueMangas = [];
 
   async function getProfile() {
     try {
@@ -67,15 +69,12 @@ export function Dashboard({ session }) {
       }
 
       if (data) {
-        console.log(data);
         for (const mangaid of data) {
-          const data = await axios.get(
+          const response = await axios.get(
             `https://kitsu.io/api/edge/manga/${mangaid.manga_id}`
           );
-          console.log(mangaid);
-          favMangasArr.push(data.data.data);
+          favMangasArr.push(response.data.data);
         }
-        console.log('mangaids:', favMangasArr);
         setFavMangas(favMangasArr);
         setLoading(false);
       }
@@ -104,7 +103,7 @@ export function Dashboard({ session }) {
   const renderFavMangas = () => {
     return favMangas.map((favManga) => {
       {
-        console.log(favManga);
+        // console.log('account line 110 ', favManga);
       }
       <MangaCard favManga={favManga} />;
     });
@@ -171,3 +170,5 @@ export function Dashboard({ session }) {
     </Container>
   );
 }
+
+

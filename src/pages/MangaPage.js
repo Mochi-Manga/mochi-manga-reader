@@ -19,12 +19,10 @@ const MangaPage = () => {
       setLoading(true);
       try {
         const data = await axios.get(`https://kitsu.io/api/edge/manga/${id}`);
-        console.log('data line 30 ', data);
         setPoster({ data });
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.log('error ', error);
       }
     };
     response();
@@ -37,7 +35,6 @@ const MangaPage = () => {
     <Container sx={{ maxWidth: 2000 }} className="card">
       <CardContent>
         <Typography variant="h5" component="div" className="title">
-          {console.log('poster line 50 ', poster)}
           {poster.data.data.data.attributes.canonicalTitle}
         </Typography>
         <img
